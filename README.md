@@ -16,7 +16,7 @@ config-dir = "config"   # default: "1_config"
 ## Install
 
 ```bash
-pipx install trun # global
+pipx install t-run # global
 ```
 
 ## Usage

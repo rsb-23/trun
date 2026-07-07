@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "trun"
+name = "t-run"
 dynamic = ["version"]
 description = "Config dir aware CLI wrapper and pre-commit hook dispatcher"
 readme = "README.md"
