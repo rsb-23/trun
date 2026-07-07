@@ -1,0 +1,19 @@
+include = ["pyproject.toml", "*.py", "trun/**/*.py", "tests/**/*.py"]
+line-length = 120
+output-format = "concise"
+target-version = "py312"
+
+[format]
+docstring-code-line-length = 100
+skip-magic-trailing-comma = true
+
+[lint]
+select = ["F", "E", "W", "B", "I", "PL", "RUF005", "RUF010"]
+ignore = ["E203", "E501", "B028", "B905"]
+
+[lint.per-file-ignores]
+"*/__init__.py" = ["F401"]
+
+[lint.isort]
+split-on-trailing-comma = false
+combine-as-imports = false

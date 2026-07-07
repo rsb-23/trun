@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "trun"
+dynamic = ["version"]
+description = "Config dir aware CLI wrapper and pre-commit hook dispatcher"
+readme = "README.md"
+
+license = "MIT"
+authors = [{ name = "Rishabh B" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance"
+]
+
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+build = ["build", "twine"]
+dev = ["ruamel.yaml"]
+lint = ["pre-commit"]
+test = ["hypothesis", "pytest", "pytest-cov"]
+
+[project.scripts]
+trun = "trun.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/rsb-23/trun"
+Issues = "https://github.com/rsb-23/trun/issues"
+
+# Build Config
+[tool.hatch.version]
+source = "vcs"
+[tool.hatch.build.targets.sdist]
+include = ["trun/", "LICENSE", "README.md", "pyproject.toml"]
+[tool.hatch.build.targets.wheel]
+packages = ["trun"]
+
+# Tool Config
+[tool]
+config-dir = "1_config"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]  # Path to your test files
+
+[tool.coverage.report]
+fail_under = 75.0
+[tool.coverage.run]
+source = ["vobjectx/"]
+omit = ["tests/*", "wrappers.py"]

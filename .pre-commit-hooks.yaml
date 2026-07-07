@@ -1,0 +1,35 @@
+- id: ruff-check
+  name: ruff check (trun)
+  entry: python -m trun ruff check --force-exclude
+  language: python
+  types_or: [python, pyi, jupyter]
+  args: []
+  additional_dependencies: ["ruff==0.15.20"]
+
+- id: ruff-format
+  name: ruff format (trun)
+  entry: python -m trun ruff check --force-exclude
+  language: python
+  types_or: [python, pyi, jupyter]
+  additional_dependencies: ["ruff==0.15.20"]
+
+- id: black
+  name: black (trun)
+  entry: python -m trun black
+  language: python
+  types_or: [python, pyi, jupyter]
+  additional_dependencies: ["black==26.5.1"]
+
+- id: isort
+  name: isort (trun)
+  entry: python -m trun isort
+  language: python
+  types_or: [python, pyi, jupyter]
+  additional_dependencies: ["isort==8.0.1"]
+
+- id: mypy
+  name: mypy (trun)
+  entry: python -m trun mypy
+  language: python
+  types_or: [python, pyi, jupyter]
+  additional_dependencies: ["mypy==2.1.0"]
