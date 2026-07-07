@@ -17,3 +17,6 @@ ignore = ["E203", "E501", "B028", "B905"]
 [lint.isort]
 split-on-trailing-comma = false
 combine-as-imports = false
+
+[lint.pylint]
+allow-magic-value-types = ["str", "int"]

@@ -41,7 +41,7 @@ python -m trun ruff .
 ```yaml
 repos:
   - repo: https://github.com/rsb-23/trun
-    rev: v0.1.0
+    rev: v0.0.2
     hooks:
       - id: ruff-check
       - id: ruff-format

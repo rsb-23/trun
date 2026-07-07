@@ -1,5 +1,12 @@
+__pycache__/
+
+# Build detritus
+build/
+dist/
+.eggs
+*.egg-info/
+
 .idea/
 .venv/
 venv/
-
-dist/*
+*.env
