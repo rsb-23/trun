@@ -28,11 +28,11 @@ classifiers = [
 
 requires-python = ">=3.11"
 
-[project.optional-dependencies]
+[dependency-groups]
 build = ["build", "twine"]
-dev = ["ruamel.yaml"]
 lint = ["pre-commit"]
 test = ["hypothesis", "pytest", "pytest-cov"]
+dev = ["ruamel.yaml",  {include-group="lint"}]
 
 [project.scripts]
 trun = "trun.cli:main"

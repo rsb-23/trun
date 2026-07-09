@@ -1,33 +1,27 @@
-import os
-import shutil
-import sys
+from argparse import Namespace
+from pathlib import Path
 
-from trun.data import CONFIG_FILES, DEFAULT_CONFIG_DIR, USAGE_TEXT, VERSION
+from trun.data import CONFIG_FILES, resolve_config_dir
 
 
-def move(config_dir: str):
-    if not os.path.isdir(config_dir):
-        os.mkdir(config_dir)
+def move(config_dir: Path, force: bool = False):
+    config_dir.mkdir(exist_ok=True)
 
     for filename in CONFIG_FILES:
-        if not os.path.exists(filename):
+        file = Path(filename)
+        if not file.exists():
             continue
-        try:
-            shutil.move(filename, config_dir)
+
+        dst = config_dir / file.name
+        if not dst.exists() or force:
+            file.replace(config_dir / file)
             print(f"Moved {filename} to {config_dir}")
-        except shutil.Error as e:
-            print(e)
+        else:
+            print(f"{dst} already exists")
 
 
-def handle_command(command, args: list[str]):
-    match command:
-        case "--help":
-            print(USAGE_TEXT)
-        case "--version":
-            print(f"trun v{VERSION}")
+def handle_command(args: Namespace):
+    match args.command:
         case "move":
-            cdir = args[0] if args else DEFAULT_CONFIG_DIR
-            move(config_dir=cdir)
-        case _:
-            print(USAGE_TEXT, file=sys.stderr)
-            sys.exit(2)
+            cdir = args.dir or resolve_config_dir()
+            move(config_dir=Path(cdir), force=args.force)
