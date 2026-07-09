@@ -30,9 +30,10 @@ requires-python = ">=3.11"
 
 [dependency-groups]
 build = ["build", "twine"]
+ci = ["ruamel.yaml"]
 lint = ["pre-commit"]
 test = ["hypothesis", "pytest", "pytest-cov"]
-dev = ["ruamel.yaml",  {include-group="lint"}]
+dev = [{ include-group = "ci" }, { include-group = "lint" }]
 
 [project.scripts]
 trun = "trun.cli:main"
