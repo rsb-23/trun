@@ -1,9 +1,8 @@
 import argparse
-import subprocess
 import sys
 
-from trun.commands import handle_command
-from trun.data import TOOLS, VERSION, get_config_path_args
+from trun.commands import handle_command, run_tool
+from trun.data import TOOLS, VERSION
 
 
 def main():
@@ -16,9 +15,12 @@ def main():
     for cmd in TOOLS:
         subparsers.add_parser(cmd)
 
+    subparsers.add_parser("init", help="Do tool setup")
     move_parser = subparsers.add_parser("move", help="Move supported configs (like .flake8) to config-dir")
-    move_parser.add_argument("dir", nargs="?", help="The config directory to move the configs")
     move_parser.add_argument("--force", "-f", action="store_true", help="Force the move operation")
+
+    run_parser = subparsers.add_parser("run", help="Run the commands from trun.toml")
+    run_parser.add_argument("group", help="Group of commands to run")
 
     args, extra_args = parser.parse_known_args()
     if not args.command:
@@ -30,12 +32,7 @@ def main():
         handle_command(args)
         sys.exit(0)
 
-    args = [cmd, *extra_args, *get_config_path_args(cmd)]
-    try:
-        result = subprocess.run(args, check=True)
-        sys.exit(result.returncode)
-    except subprocess.CalledProcessError as e:
-        sys.exit(e.returncode)
+    run_tool(cmd, *extra_args)
 
 
 if __name__ == "__main__":

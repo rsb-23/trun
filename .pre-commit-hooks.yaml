@@ -4,14 +4,15 @@
   language: python
   types_or: [python, pyi, jupyter]
   args: []
-  additional_dependencies: ["ruff==0.15.20"]
+  additional_dependencies: &ruff
+  - "ruff==0.15.21"
 
 - id: ruff-format
   name: ruff format (trun)
-  entry: python -m trun ruff check --force-exclude
+  entry: python -m trun ruff format
   language: python
   types_or: [python, pyi, jupyter]
-  additional_dependencies: ["ruff==0.15.20"]
+  additional_dependencies: *ruff
 
 - id: black
   name: black (trun)
@@ -32,4 +33,4 @@
   entry: python -m trun mypy
   language: python
   types_or: [python, pyi, jupyter]
-  additional_dependencies: ["mypy==2.1.0"]
+  additional_dependencies: ["mypy==2.2.0"]

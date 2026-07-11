@@ -13,27 +13,37 @@ files there, instead of the project root.
 config-dir = "config"   # default: "1_config"
 ```
 
-## Install
+## Quickstart
 
 ```bash
 pipx install t-run # global
+trun init
+trun black .
 ```
 
 ## Usage
 
+### To run individual commands
+
 ```bash
-trun ruff check .
 trun black .
-trun mypy .
-trun isort .
-trun flake8 .
+trun pre-commit run
 trun pylint *
+trun ruff check .
 ```
 
-Or without installing, from the repo root:
+### To run command groups
 
-```bash
-python -m trun ruff .
+Add groups of command in `trun.toml` and run using `trun run`
+
+```toml
+lint = ["pre-commit run --all-files"]
+fix = ["ruff check --fix", "ruff format"]
+```
+
+```commandline
+trun run lint
+trun run fix
 ```
 
 ## pre-commit
@@ -41,13 +51,12 @@ python -m trun ruff .
 ```yaml
 repos:
   - repo: https://github.com/rsb-23/trun
-    rev: v0.0.2
+    rev: v0.0.4
     hooks:
-      - id: ruff-check
-      - id: ruff-format
       - id: black
       - id: isort
-      - id: mypy
+      - id: flake8
+      - id: ...
 ```
 
 Only the hooks you list are installed — each pulls its own pinned
@@ -56,8 +65,7 @@ dependency via `additional_dependencies` in `.pre-commit-hooks.yaml`.
 ## Build
 
 ```bash
-pip install build
-git tag v0.1.0
+pip install --group build
 python -m build
 ```
 

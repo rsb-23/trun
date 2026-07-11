@@ -35,10 +35,10 @@ def resolve_config_dir() -> Path:
     return Path(cfg.get("tool", {}).get("config-dir", DEFAULT_CONFIG_DIR))
 
 
-def get_config_path_args(key) -> tuple[str, Path]:
+def get_config_path_args(key) -> tuple[str, str]:
     cdir = resolve_config_dir()
     option, file = TOOLS[key]
     cfg_file = cdir / file
     if not cfg_file.exists():
         raise FileNotFoundError(cfg_file)
-    return option, cfg_file
+    return option, str(cfg_file)
