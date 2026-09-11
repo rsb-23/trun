@@ -5,7 +5,7 @@
   types_or: [python, pyi, jupyter]
   args: []
   additional_dependencies: &ruff
-  - "ruff==0.16.5"
+  - "ruff==0.16.7"
 
 - id: ruff-format
   name: ruff format (trun)
