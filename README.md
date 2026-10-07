@@ -27,7 +27,6 @@ trun black .
 
 ```bash
 trun black .
-trun pre-commit run
 trun pylint *
 trun ruff check .
 ```
@@ -57,6 +56,12 @@ repos:
       - id: isort
       - id: flake8
       - id: ...
+```
+
+```commandline
+pip install pre-commit
+trun pre-commit install
+trun pre-commit run --all-files
 ```
 
 Only the hooks you list are installed — each pulls its own pinned
