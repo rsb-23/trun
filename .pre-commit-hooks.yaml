@@ -5,7 +5,7 @@
   types_or: [python, pyi, jupyter]
   args: []
   additional_dependencies: &ruff
-  - "ruff==0.16.10"
+  - "ruff==0.17.0"
 
 - id: ruff-format
   name: ruff format (trun)
@@ -19,7 +19,7 @@
   entry: python -m trun black
   language: python
   types_or: [python, pyi, jupyter]
-  additional_dependencies: ["black==26.10.0"]
+  additional_dependencies: ["black==26.10.1"]
 
 - id: isort
   name: isort (trun)
